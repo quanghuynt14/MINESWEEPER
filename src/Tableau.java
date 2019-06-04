@@ -112,6 +112,7 @@ public class Tableau {
     }
     
     // Efface ecran pour Windowns
+    /*
     public void effaceEcran() {
         try {	
 			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
@@ -119,12 +120,12 @@ public class Tableau {
 			System.out.println(E);
 		}
     }
-    
+    */
 	//Efface ecran pour Linux
-	/*
+    
 	public void effaceEcran() {  
 		System.out.print("\033[H\033[2J");  
 		System.out.flush();  
 	} 
-	*/
+	
 }

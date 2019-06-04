@@ -131,7 +131,7 @@ public class Demineur {
 					Aider();
 					ok = false;
 				} else {
-					System.out.println("Vous n'avez plus soulagement!!!");
+					System.out.println("Vous n'avez plus d'aide!!!");
 					ok = true;
 				}
 			} else ok = false;
