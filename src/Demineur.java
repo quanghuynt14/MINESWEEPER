@@ -12,11 +12,13 @@ public class Demineur {
 	public static int y = 0;
 	public static char c = ' ';
 	public static int help = 0;
+    public static int nombreBombes = 0;
 	
 	public static void main(String[] args) {
 		
 		reglagesJeu();
-		tableau = new Tableau(tailleTableau, calculNombreBombes());
+        calculNombreBombesEtHelps();
+		tableau = new Tableau(tailleTableau, nombreBombes);
 		
 		premiereSelection();
 		tableau.Generer(x, y);
@@ -47,7 +49,7 @@ public class Demineur {
 	}
 	
 	public static void reglagesJeu() {
-		
+		// Choisir la difficulte
 		System.out.println("Quelle difficulte choisissez-vous?");
         System.out.println("Niveau facile: tapez 1");
         System.out.println("Niveau moyen: tapez 2");
@@ -58,6 +60,7 @@ public class Demineur {
         	niveauJeu = sc.nextInt();
         }
         
+        // Choisir la dimension
         System.out.println("De quelle taille voulez-vous votre tableau? (nombre de lignes = nombre de colonnes)");
         tailleTableau = sc.nextInt();
         while (tailleTableau <= 1) {
@@ -68,27 +71,25 @@ public class Demineur {
         
 	}
 	
-	public static int calculNombreBombes() {
-		int n = 0;
+	public static void calculNombreBombesEtHelps() {
         if (niveauJeu == 1) {
-            n = (tailleTableau * tailleTableau)/10;
-            help = n/2;
+            nombreBombes = (tailleTableau * tailleTableau)/10;
+            help = nombreBombes/2;
         } else if (niveauJeu == 2) {
-        	n = (tailleTableau * tailleTableau)/5;
-        	help = n/2;
+        	nombreBombes = (tailleTableau * tailleTableau)/5;
+        	help = nombreBombes/3;
         } else if (niveauJeu == 3) {
-        	n = (tailleTableau * tailleTableau)/2;
-        	help = n/3;
+        	nombreBombes = (tailleTableau * tailleTableau)/2;
+        	help = nombreBombes/5;
         }
         if (help == 0) help = 1;
-        if (n == 0) return 1;
-        else return n; 
+        if (nombreBombes == 0) nombreBombes = 1;
 	}
 
 	public static void selectionLigneColonne() {
 		System.out.println("Selectionnez la case a ouvrir, tapez la ligne et la colonne.");
 		System.out.println("Si vous voulez indiquer ou retirer la presence de bombes par des drapeaux, tapez p");
-		System.out.println("Si vous avez besoin d'aide, tapez h (nombre de soulagements restants: " + help + ")");
+		System.out.println("Si vous avez besoin d'aide, tapez h (nombre d'aides restants: " + help + ")");
 		try {
 			c = ' ';
 			x = sc.nextInt(); 
@@ -184,7 +185,8 @@ public class Demineur {
 		if (s == 'Y' || s == 'y') {
 			gameOver = false;
 			reglagesJeu();
-			tableau = new Tableau(tailleTableau, calculNombreBombes());
+            calculNombreBombesEtHelps();
+			tableau = new Tableau(tailleTableau, nombreBombes);
 			premiereSelection();
 			tableau.Generer(x, y);
 		} else play = false;
